@@ -13,7 +13,7 @@ const App = () => {
   // }
 
   const search = (term, successCB, errCB) => {
-    console.log(term);
+    // console.log('term: ', term);
     $.ajax({
       // The URL for the request
       url: '/repos',
@@ -25,6 +25,7 @@ const App = () => {
       // dataType : 'json',
       success: (data) => {
         console.log('success');
+        // console.log('data: ', data); // produces empty array
       },
       error: (data) => {
         console.log('Failed to search for: ', data);
