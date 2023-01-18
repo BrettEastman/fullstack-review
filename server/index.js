@@ -1,4 +1,7 @@
 const express = require('express');
+const { getReposByUsername } = require('../helpers/github.js');
+const { save } = require('../database/index.js');
+// non-destructured version: const getReposByUsername = require('../helpers/github.js').getReposByUsername
 let app = express();
 
 // TODO - your code here!
@@ -7,14 +10,16 @@ let app = express();
 // this server must serve those files when requested.
 app.use(express.static('client/dist'));
 app.use(express.json());
-app.use(express.urlencoded());
-
-// const github = require('./helpers')
+// app.use(express.urlencoded());
 
 app.post('/repos', function (req, res) {
-  console.log(req.body);
+  getReposByUsername(req.body.name)
+    .then(function(results) {
+      console.log(results);
+    });
+  save();
   res.sendStatus(200);
-  // github.getReposByUsername(req.body, (err, result) => {
+
   //   if (err) {
   //     sendStatus(400);
   //   } else {
@@ -38,3 +43,4 @@ app.listen(port, function() {
   console.log(`listening on port ${port}`);
 });
 
+console.log("??", getReposByUsername);

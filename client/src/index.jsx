@@ -18,10 +18,10 @@ const App = () => {
       // The URL for the request
       url: '/repos',
       // The data to send (will be converted to a query string)
-      data: {name: term},
+      data: JSON.stringify({name: term}),
       type: "POST",
       // The type of data we expect back
-      // contentType: 'application/json',
+      contentType: 'application/json',
       // dataType : 'json',
       success: (data) => {
         console.log('success');
@@ -31,6 +31,8 @@ const App = () => {
       },
     });
   };
+
+  // do a get request to "setRepo" to the new repo
 
   return (
     <div>
