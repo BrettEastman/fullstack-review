@@ -5,8 +5,22 @@ let app = express();
 // Set up static file service for files in the `client/dist` directory.
 // Webpack is configured to generate files in that directory and
 // this server must serve those files when requested.
+app.use(express.static('client/dist'));
+app.use(express.json());
+app.use(express.urlencoded());
+
+// const github = require('./helpers')
 
 app.post('/repos', function (req, res) {
+  console.log(req.body);
+  res.sendStatus(200);
+  // github.getReposByUsername(req.body, (err, result) => {
+  //   if (err) {
+  //     sendStatus(400);
+  //   } else {
+  //     status(201).json(result);
+  //   }
+  // });
   // TODO - your code here!
   // This route should take the github username provided
   // and get the repo information from the github API, then

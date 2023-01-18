@@ -8,9 +8,29 @@ const App = () => {
 
   const [repos, setRepos] = useState([]);
 
-  const search = (term) => {
-    console.log(`${term} was searched`);
-  }
+  // const search = (term, successCB, errCB) => {
+  //   console.log('still working');
+  // }
+
+  const search = (term, successCB, errCB) => {
+    console.log(term);
+    $.ajax({
+      // The URL for the request
+      url: '/repos',
+      // The data to send (will be converted to a query string)
+      data: {name: term},
+      type: "POST",
+      // The type of data we expect back
+      // contentType: 'application/json',
+      // dataType : 'json',
+      success: (data) => {
+        console.log('success');
+      },
+      error: (data) => {
+        console.log('Failed to search for: ', data);
+      },
+    });
+  };
 
   return (
     <div>
