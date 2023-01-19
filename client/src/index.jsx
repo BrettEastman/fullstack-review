@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Search from './components/Search.jsx';
 import RepoList from './components/RepoList.jsx';
+import axios from 'axios';
 
 const App = () => {
 
   const [repos, setRepos] = useState([]);
 
-  // const search = (term, successCB, errCB) => {
-  //   console.log('still working');
-  // }
+  useEffect(() => {
+    getRepos()
+  }, [])
 
   const search = (term, successCB, errCB) => {
     // console.log('term: ', term);
@@ -25,7 +26,7 @@ const App = () => {
       // dataType : 'json',
       success: (data) => {
         console.log('success');
-        // console.log('data: ', data); // produces empty array
+        getRepos();
       },
       error: (data) => {
         console.log('Failed to search for: ', data);
@@ -33,7 +34,16 @@ const App = () => {
     });
   };
 
-  // do a get request to "setRepo" to the new repo
+  const getRepos = () => {
+    $.ajax({
+      url: '/repos',
+      type: 'GET',
+      success: (myData) => {
+        console.log('myData: ', myData);
+        setRepos(myData);
+      }
+    });
+  };
 
   return (
     <div>
