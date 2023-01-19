@@ -15,7 +15,7 @@ exports.save = (data) => {
   console.log(data);
   const array = [];
   for (let repo of data) {
-    let obj = {id: repo.id, name: repo.name, url: repo.owner.url};
+    let obj = {id: repo.id, name: repo.name, url: repo.html_url};
     array.push(obj);
   }
   return Repo.create(array);
@@ -23,7 +23,7 @@ exports.save = (data) => {
 
 // when you 'return' a promise it means you can use it with .then elsewhere
 exports.getAll = () => {
-  return Repo.find({}).sort('-name').limit(25).exec();
+  return Repo.find({}).sort('name').limit(25).exec();
 }
 
 // module.exports.save = save;
