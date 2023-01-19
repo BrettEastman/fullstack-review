@@ -24,7 +24,7 @@ app.post('/repos', function (req, res) {
       console.log('getReposByUsername results.data[0].owner.url', results.data[0].owner.url);
       save(id, name, url);
     })
-  res.sendStatus(200);
+  res.sendStatus(201);
   // TODO - your code here!
   // This route should take the github username provided
   // and get the repo information from the github API, then
@@ -35,7 +35,7 @@ app.get('/repos', function (req, res) {
   // return res.json({ message: "Hello, World ✌️" });
   // TODO - your code here!
   // This route should send back the top 25 repos
-  const allRepos = Repo.find();
+  const allRepos = Repo.find({}).sort('-name').limit(25).exec();
   return res.status(200).json(allRepos);
 });
 

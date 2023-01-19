@@ -9,6 +9,7 @@ let repoSchema = new mongoose.Schema({
 
 let Repo = mongoose.model('Repo', repoSchema);
 
+// MODELS:
 let save = (id, name, url) => {
   // TODO: Your code here
   // This function should save a repo or repos to
